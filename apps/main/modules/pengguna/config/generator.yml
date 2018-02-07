@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Pengguna
+    theme:            default
+    
+    list:
+        display: [ sfGuardUser, nama, wilayah, keterangan, _opsi]
+        fields:
+            sf_guard_user:
+               name: Username
+    
+    edit:
+        display: [ _id_sf_guard_user, nama, id_wilayah, keterangan ]
+        fields:
+            id_sf_guard_user:
+                name: Username
+            id_wilayah:
+                name: Wilayah
