@@ -10,6 +10,17 @@
  */
 class ipalKomunalActions extends autoipalKomunalActions
 {
+    public function executeStatusChange()
+    {
+        $id = $this->getRequestParameter('id');
+        $this->ipal_komunal = IpalKomunalPeer::retrieveByPK($id);
+        $this->updateIpalKomunalFromRequest();
+        if ($this->ipal_komunal->getStatus() == 0) $this->ipal_komunal->setStatus(1);
+        else $this->ipal_komunal->setstatus(0);
+        $this->saveIpalKomunal($this->ipal_komunal);
+        return $this->redirect('ipalKomunal/list');
+    }
+    
     public function executeList()
   {
     $this->processSort();

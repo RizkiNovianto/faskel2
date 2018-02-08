@@ -52,5 +52,9 @@ class IpalKomunalMapBuilder {
 
 		$tMap->addColumn('KONDISI', 'Kondisi', 'string', CreoleTypes::VARCHAR, false, 25);
 
+		$tMap->addColumn('STATUS', 'Status', 'int', CreoleTypes::TINYINT, false, null);
+
+		$tMap->addColumn('KETERANGAN', 'Keterangan', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 	} 
 } 

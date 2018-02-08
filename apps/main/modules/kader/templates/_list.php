@@ -10,7 +10,7 @@
 </tr>
 </thead>
 <tfoot>
-<tr><th colspan="10">
+<tr><th colspan="12">
 <div class="float-right">
 <?php if ($pager->haveToPaginate()): ?>
   <?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/first.png', array('align' => 'absmiddle', 'alt' => __('First'), 'title' => __('First'))), 'kader/list?page=1') ?>

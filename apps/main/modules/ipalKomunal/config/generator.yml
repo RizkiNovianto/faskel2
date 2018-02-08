@@ -5,7 +5,7 @@ generator:
     theme:            default
     
     list:
-        display: [wilayah, nama, alamat, dasar_pembangunan, _date, pengelola, kondisi, _opsi]
+        display: [wilayah, nama, alamat, dasar_pembangunan, _date, pengelola, kondisi, _status_view, keterangan, _opsi]
         filters: [id_wilayah, tahun_pembangunan]
         fields:
             date:
@@ -14,10 +14,12 @@ generator:
                 name: Wilayah
             tahun_pembangunan:
                 name: Tahun Pembangunan
+            status_view:
+                name: Status
         
     edit:
         title: Form Pengisian Data IPAL Komunal
-        display: [_id_wilayah, nama, alamat, dasar_pembangunan, _tanggal_pembangunan, _bulan_pembangunan, tahun_pembangunan, pengelola, kondisi]
+        display: [_id_wilayah, nama, alamat, dasar_pembangunan, _tanggal_pembangunan, _bulan_pembangunan, tahun_pembangunan, pengelola, kondisi, _status, keterangan]
         fields:
             id_wilayah:
                 name: Wilayah

@@ -43,6 +43,14 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 	
 	protected $valid = 0;
 
+
+	
+	protected $status = 0;
+
+
+	
+	protected $keterangan;
+
 	
 	protected $aWilayah;
 
@@ -116,6 +124,20 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 	{
 
 		return $this->valid;
+	}
+
+	
+	public function getStatus()
+	{
+
+		return $this->status;
+	}
+
+	
+	public function getKeterangan()
+	{
+
+		return $this->keterangan;
 	}
 
 	
@@ -253,6 +275,34 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setStatus($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->status !== $v || $v === 0) {
+			$this->status = $v;
+			$this->modifiedColumns[] = KaderPeer::STATUS;
+		}
+
+	} 
+	
+	public function setKeterangan($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->keterangan !== $v) {
+			$this->keterangan = $v;
+			$this->modifiedColumns[] = KaderPeer::KETERANGAN;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -275,11 +325,15 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 
 			$this->valid = $rs->getInt($startcol + 8);
 
+			$this->status = $rs->getInt($startcol + 9);
+
+			$this->keterangan = $rs->getString($startcol + 10);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 9; 
+						return $startcol + 11; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Kader object", $e);
 		}
@@ -463,6 +517,12 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 			case 8:
 				return $this->getValid();
 				break;
+			case 9:
+				return $this->getStatus();
+				break;
+			case 10:
+				return $this->getKeterangan();
+				break;
 			default:
 				return null;
 				break;
@@ -482,6 +542,8 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 			$keys[6] => $this->getRw(),
 			$keys[7] => $this->getNoTelp(),
 			$keys[8] => $this->getValid(),
+			$keys[9] => $this->getStatus(),
+			$keys[10] => $this->getKeterangan(),
 		);
 		return $result;
 	}
@@ -524,6 +586,12 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 			case 8:
 				$this->setValid($value);
 				break;
+			case 9:
+				$this->setStatus($value);
+				break;
+			case 10:
+				$this->setKeterangan($value);
+				break;
 		} 	}
 
 	
@@ -540,6 +608,8 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setRw($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setNoTelp($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setValid($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setStatus($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setKeterangan($arr[$keys[10]]);
 	}
 
 	
@@ -556,6 +626,8 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(KaderPeer::RW)) $criteria->add(KaderPeer::RW, $this->rw);
 		if ($this->isColumnModified(KaderPeer::NO_TELP)) $criteria->add(KaderPeer::NO_TELP, $this->no_telp);
 		if ($this->isColumnModified(KaderPeer::VALID)) $criteria->add(KaderPeer::VALID, $this->valid);
+		if ($this->isColumnModified(KaderPeer::STATUS)) $criteria->add(KaderPeer::STATUS, $this->status);
+		if ($this->isColumnModified(KaderPeer::KETERANGAN)) $criteria->add(KaderPeer::KETERANGAN, $this->keterangan);
 
 		return $criteria;
 	}
@@ -601,6 +673,10 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 		$copyObj->setNoTelp($this->no_telp);
 
 		$copyObj->setValid($this->valid);
+
+		$copyObj->setStatus($this->status);
+
+		$copyObj->setKeterangan($this->keterangan);
 
 
 		$copyObj->setNew(true);

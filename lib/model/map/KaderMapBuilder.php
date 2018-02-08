@@ -50,5 +50,9 @@ class KaderMapBuilder {
 
 		$tMap->addColumn('VALID', 'Valid', 'int', CreoleTypes::TINYINT, false, null);
 
+		$tMap->addColumn('STATUS', 'Status', 'int', CreoleTypes::TINYINT, false, null);
+
+		$tMap->addColumn('KETERANGAN', 'Keterangan', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 	} 
 } 

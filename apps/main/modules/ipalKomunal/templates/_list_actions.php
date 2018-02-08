@@ -3,6 +3,12 @@
 // date: 2018/01/23 09:48:01
 ?>
 <ul class="sf_admin_actions">
+    <li><?php echo button_to(__('Reset Pengurutan'), 'ipalKomunal/list?sort=id&type=asc', array (
+  'class' => 'sf_admin_action_reset_filter',
+)) ?></li>
+    <li><?php echo button_to(__('Urut Wilayah'), 'ipalKomunal/list?sort=id_wilayah&type=asc', array (
+  'class' => 'sf_admin_action_list',
+)) ?></li>
     <li><?php echo button_to(__('Simpan Excel'), 'ipalKomunal/ExcelGenerate', array (
   'class' => 'sf_admin_action_excel',
 )) ?></li>

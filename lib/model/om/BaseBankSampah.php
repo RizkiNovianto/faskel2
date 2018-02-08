@@ -55,6 +55,14 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 	
 	protected $omset;
 
+
+	
+	protected $status = 0;
+
+
+	
+	protected $keterangan;
+
 	
 	protected $aWilayah;
 
@@ -146,6 +154,20 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 	{
 
 		return $this->omset;
+	}
+
+	
+	public function getStatus()
+	{
+
+		return $this->status;
+	}
+
+	
+	public function getKeterangan()
+	{
+
+		return $this->keterangan;
 	}
 
 	
@@ -321,6 +343,34 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setStatus($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->status !== $v || $v === 0) {
+			$this->status = $v;
+			$this->modifiedColumns[] = BankSampahPeer::STATUS;
+		}
+
+	} 
+	
+	public function setKeterangan($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->keterangan !== $v) {
+			$this->keterangan = $v;
+			$this->modifiedColumns[] = BankSampahPeer::KETERANGAN;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -349,11 +399,15 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 
 			$this->omset = $rs->getInt($startcol + 11);
 
+			$this->status = $rs->getInt($startcol + 12);
+
+			$this->keterangan = $rs->getString($startcol + 13);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 12; 
+						return $startcol + 14; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating BankSampah object", $e);
 		}
@@ -533,6 +587,12 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 			case 11:
 				return $this->getOmset();
 				break;
+			case 12:
+				return $this->getStatus();
+				break;
+			case 13:
+				return $this->getKeterangan();
+				break;
 			default:
 				return null;
 				break;
@@ -555,6 +615,8 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 			$keys[9] => $this->getKetua(),
 			$keys[10] => $this->getJumlahNasabah(),
 			$keys[11] => $this->getOmset(),
+			$keys[12] => $this->getStatus(),
+			$keys[13] => $this->getKeterangan(),
 		);
 		return $result;
 	}
@@ -606,6 +668,12 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 			case 11:
 				$this->setOmset($value);
 				break;
+			case 12:
+				$this->setStatus($value);
+				break;
+			case 13:
+				$this->setKeterangan($value);
+				break;
 		} 	}
 
 	
@@ -625,6 +693,8 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[9], $arr)) $this->setKetua($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setJumlahNasabah($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setOmset($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setStatus($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setKeterangan($arr[$keys[13]]);
 	}
 
 	
@@ -644,6 +714,8 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BankSampahPeer::KETUA)) $criteria->add(BankSampahPeer::KETUA, $this->ketua);
 		if ($this->isColumnModified(BankSampahPeer::JUMLAH_NASABAH)) $criteria->add(BankSampahPeer::JUMLAH_NASABAH, $this->jumlah_nasabah);
 		if ($this->isColumnModified(BankSampahPeer::OMSET)) $criteria->add(BankSampahPeer::OMSET, $this->omset);
+		if ($this->isColumnModified(BankSampahPeer::STATUS)) $criteria->add(BankSampahPeer::STATUS, $this->status);
+		if ($this->isColumnModified(BankSampahPeer::KETERANGAN)) $criteria->add(BankSampahPeer::KETERANGAN, $this->keterangan);
 
 		return $criteria;
 	}
@@ -695,6 +767,10 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 		$copyObj->setJumlahNasabah($this->jumlah_nasabah);
 
 		$copyObj->setOmset($this->omset);
+
+		$copyObj->setStatus($this->status);
+
+		$copyObj->setKeterangan($this->keterangan);
 
 
 		$copyObj->setNew(true);

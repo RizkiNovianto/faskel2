@@ -5,7 +5,7 @@ generator:
     theme:            default
     
     list:
-        display: [wilayah, nama, alamat, dasar_pendirian, _date, sk, ketua, jumlah_nasabah, _omset, _opsi]
+        display: [wilayah, nama, alamat, dasar_pendirian, _date, sk, ketua, jumlah_nasabah, _omset, _status_view, keterangan, _opsi]
         filters: [id_wilayah, tahun_pendirian]
         fields:
             date:
@@ -14,10 +14,12 @@ generator:
                 name: Wilayah
             tahun_pendirian:
                 name: Tahun Pendirian
+            status_view:
+                name: Status
         
     edit:
         title: Form Pengisian Data Bank Sampah
-        display: [_id_wilayah, nama, alamat, dasar_pendirian, _tanggal_pendirian, _bulan_pendirian, tahun_pendirian, sk, ketua, jumlah_nasabah, omset]
+        display: [_id_wilayah, nama, alamat, dasar_pendirian, _tanggal_pendirian, _bulan_pendirian, tahun_pendirian, sk, ketua, jumlah_nasabah, omset, _status, keterangan]
         fields:
             id_wilayah:
                 name: Wilayah

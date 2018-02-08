@@ -13,7 +13,7 @@ abstract class BaseBankSampahPeer {
 	const CLASS_DEFAULT = 'lib.model.BankSampah';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -56,23 +56,29 @@ abstract class BaseBankSampahPeer {
 	const OMSET = 'bank_sampah.OMSET';
 
 	
+	const STATUS = 'bank_sampah.STATUS';
+
+	
+	const KETERANGAN = 'bank_sampah.KETERANGAN';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'IdWilayah', 'Nama', 'Alamat', 'DasarPendirian', 'TanggalPendirian', 'BulanPendirian', 'TahunPendirian', 'Sk', 'Ketua', 'JumlahNasabah', 'Omset', ),
-		BasePeer::TYPE_COLNAME => array (BankSampahPeer::ID, BankSampahPeer::ID_WILAYAH, BankSampahPeer::NAMA, BankSampahPeer::ALAMAT, BankSampahPeer::DASAR_PENDIRIAN, BankSampahPeer::TANGGAL_PENDIRIAN, BankSampahPeer::BULAN_PENDIRIAN, BankSampahPeer::TAHUN_PENDIRIAN, BankSampahPeer::SK, BankSampahPeer::KETUA, BankSampahPeer::JUMLAH_NASABAH, BankSampahPeer::OMSET, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'id_wilayah', 'nama', 'alamat', 'dasar_pendirian', 'tanggal_pendirian', 'bulan_pendirian', 'tahun_pendirian', 'sk', 'ketua', 'jumlah_nasabah', 'omset', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'IdWilayah', 'Nama', 'Alamat', 'DasarPendirian', 'TanggalPendirian', 'BulanPendirian', 'TahunPendirian', 'Sk', 'Ketua', 'JumlahNasabah', 'Omset', 'Status', 'Keterangan', ),
+		BasePeer::TYPE_COLNAME => array (BankSampahPeer::ID, BankSampahPeer::ID_WILAYAH, BankSampahPeer::NAMA, BankSampahPeer::ALAMAT, BankSampahPeer::DASAR_PENDIRIAN, BankSampahPeer::TANGGAL_PENDIRIAN, BankSampahPeer::BULAN_PENDIRIAN, BankSampahPeer::TAHUN_PENDIRIAN, BankSampahPeer::SK, BankSampahPeer::KETUA, BankSampahPeer::JUMLAH_NASABAH, BankSampahPeer::OMSET, BankSampahPeer::STATUS, BankSampahPeer::KETERANGAN, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'id_wilayah', 'nama', 'alamat', 'dasar_pendirian', 'tanggal_pendirian', 'bulan_pendirian', 'tahun_pendirian', 'sk', 'ketua', 'jumlah_nasabah', 'omset', 'status', 'keterangan', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdWilayah' => 1, 'Nama' => 2, 'Alamat' => 3, 'DasarPendirian' => 4, 'TanggalPendirian' => 5, 'BulanPendirian' => 6, 'TahunPendirian' => 7, 'Sk' => 8, 'Ketua' => 9, 'JumlahNasabah' => 10, 'Omset' => 11, ),
-		BasePeer::TYPE_COLNAME => array (BankSampahPeer::ID => 0, BankSampahPeer::ID_WILAYAH => 1, BankSampahPeer::NAMA => 2, BankSampahPeer::ALAMAT => 3, BankSampahPeer::DASAR_PENDIRIAN => 4, BankSampahPeer::TANGGAL_PENDIRIAN => 5, BankSampahPeer::BULAN_PENDIRIAN => 6, BankSampahPeer::TAHUN_PENDIRIAN => 7, BankSampahPeer::SK => 8, BankSampahPeer::KETUA => 9, BankSampahPeer::JUMLAH_NASABAH => 10, BankSampahPeer::OMSET => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_wilayah' => 1, 'nama' => 2, 'alamat' => 3, 'dasar_pendirian' => 4, 'tanggal_pendirian' => 5, 'bulan_pendirian' => 6, 'tahun_pendirian' => 7, 'sk' => 8, 'ketua' => 9, 'jumlah_nasabah' => 10, 'omset' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdWilayah' => 1, 'Nama' => 2, 'Alamat' => 3, 'DasarPendirian' => 4, 'TanggalPendirian' => 5, 'BulanPendirian' => 6, 'TahunPendirian' => 7, 'Sk' => 8, 'Ketua' => 9, 'JumlahNasabah' => 10, 'Omset' => 11, 'Status' => 12, 'Keterangan' => 13, ),
+		BasePeer::TYPE_COLNAME => array (BankSampahPeer::ID => 0, BankSampahPeer::ID_WILAYAH => 1, BankSampahPeer::NAMA => 2, BankSampahPeer::ALAMAT => 3, BankSampahPeer::DASAR_PENDIRIAN => 4, BankSampahPeer::TANGGAL_PENDIRIAN => 5, BankSampahPeer::BULAN_PENDIRIAN => 6, BankSampahPeer::TAHUN_PENDIRIAN => 7, BankSampahPeer::SK => 8, BankSampahPeer::KETUA => 9, BankSampahPeer::JUMLAH_NASABAH => 10, BankSampahPeer::OMSET => 11, BankSampahPeer::STATUS => 12, BankSampahPeer::KETERANGAN => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_wilayah' => 1, 'nama' => 2, 'alamat' => 3, 'dasar_pendirian' => 4, 'tanggal_pendirian' => 5, 'bulan_pendirian' => 6, 'tahun_pendirian' => 7, 'sk' => 8, 'ketua' => 9, 'jumlah_nasabah' => 10, 'omset' => 11, 'status' => 12, 'keterangan' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -149,6 +155,10 @@ abstract class BaseBankSampahPeer {
 		$criteria->addSelectColumn(BankSampahPeer::JUMLAH_NASABAH);
 
 		$criteria->addSelectColumn(BankSampahPeer::OMSET);
+
+		$criteria->addSelectColumn(BankSampahPeer::STATUS);
+
+		$criteria->addSelectColumn(BankSampahPeer::KETERANGAN);
 
 	}
 

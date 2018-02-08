@@ -42,6 +42,11 @@ propel:
       type: INTEGER
     omset: 
       type: INTEGER
+    status: 
+      type: TINYINT
+      default: 0
+    keterangan: 
+      type: LONGVARCHAR
     _indexes: 
       FK_bank_sampah_wilayah: 
         - id_wilayah
@@ -81,6 +86,11 @@ propel:
     kondisi: 
       type: VARCHAR
       size: 25
+    status: 
+      type: TINYINT
+      default: 0
+    keterangan: 
+      type: LONGVARCHAR
     _indexes: 
       FK_ipal_komunal_wilayah: 
         - id_wilayah
@@ -136,6 +146,11 @@ propel:
     valid: 
       type: TINYINT
       default: 0
+    status: 
+      type: TINYINT
+      default: 0
+    keterangan: 
+      type: LONGVARCHAR
     _indexes: 
       FK_kader_wilayah: 
         - id_wilayah

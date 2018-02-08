@@ -47,6 +47,14 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 	
 	protected $kondisi;
 
+
+	
+	protected $status = 0;
+
+
+	
+	protected $keterangan;
+
 	
 	protected $aWilayah;
 
@@ -124,6 +132,20 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 	{
 
 		return $this->kondisi;
+	}
+
+	
+	public function getStatus()
+	{
+
+		return $this->status;
+	}
+
+	
+	public function getKeterangan()
+	{
+
+		return $this->keterangan;
 	}
 
 	
@@ -271,6 +293,34 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setStatus($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->status !== $v || $v === 0) {
+			$this->status = $v;
+			$this->modifiedColumns[] = IpalKomunalPeer::STATUS;
+		}
+
+	} 
+	
+	public function setKeterangan($v)
+	{
+
+						if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->keterangan !== $v) {
+			$this->keterangan = $v;
+			$this->modifiedColumns[] = IpalKomunalPeer::KETERANGAN;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -295,11 +345,15 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 
 			$this->kondisi = $rs->getString($startcol + 9);
 
+			$this->status = $rs->getInt($startcol + 10);
+
+			$this->keterangan = $rs->getString($startcol + 11);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 10; 
+						return $startcol + 12; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating IpalKomunal object", $e);
 		}
@@ -473,6 +527,12 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 			case 9:
 				return $this->getKondisi();
 				break;
+			case 10:
+				return $this->getStatus();
+				break;
+			case 11:
+				return $this->getKeterangan();
+				break;
 			default:
 				return null;
 				break;
@@ -493,6 +553,8 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 			$keys[7] => $this->getTahunPembangunan(),
 			$keys[8] => $this->getPengelola(),
 			$keys[9] => $this->getKondisi(),
+			$keys[10] => $this->getStatus(),
+			$keys[11] => $this->getKeterangan(),
 		);
 		return $result;
 	}
@@ -538,6 +600,12 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 			case 9:
 				$this->setKondisi($value);
 				break;
+			case 10:
+				$this->setStatus($value);
+				break;
+			case 11:
+				$this->setKeterangan($value);
+				break;
 		} 	}
 
 	
@@ -555,6 +623,8 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setTahunPembangunan($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPengelola($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setKondisi($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setStatus($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setKeterangan($arr[$keys[11]]);
 	}
 
 	
@@ -572,6 +642,8 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(IpalKomunalPeer::TAHUN_PEMBANGUNAN)) $criteria->add(IpalKomunalPeer::TAHUN_PEMBANGUNAN, $this->tahun_pembangunan);
 		if ($this->isColumnModified(IpalKomunalPeer::PENGELOLA)) $criteria->add(IpalKomunalPeer::PENGELOLA, $this->pengelola);
 		if ($this->isColumnModified(IpalKomunalPeer::KONDISI)) $criteria->add(IpalKomunalPeer::KONDISI, $this->kondisi);
+		if ($this->isColumnModified(IpalKomunalPeer::STATUS)) $criteria->add(IpalKomunalPeer::STATUS, $this->status);
+		if ($this->isColumnModified(IpalKomunalPeer::KETERANGAN)) $criteria->add(IpalKomunalPeer::KETERANGAN, $this->keterangan);
 
 		return $criteria;
 	}
@@ -619,6 +691,10 @@ abstract class BaseIpalKomunal extends BaseObject  implements Persistent {
 		$copyObj->setPengelola($this->pengelola);
 
 		$copyObj->setKondisi($this->kondisi);
+
+		$copyObj->setStatus($this->status);
+
+		$copyObj->setKeterangan($this->keterangan);
 
 
 		$copyObj->setNew(true);
