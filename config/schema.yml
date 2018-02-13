@@ -47,6 +47,13 @@ propel:
       default: 0
     keterangan: 
       type: LONGVARCHAR
+    created_at: 
+      type: TIMESTAMP
+    updated_at: 
+      type: TIMESTAMP
+    is_deleted: 
+      type: TINYINT
+      default: 0
     _indexes: 
       FK_bank_sampah_wilayah: 
         - id_wilayah
@@ -91,6 +98,13 @@ propel:
       default: 0
     keterangan: 
       type: LONGVARCHAR
+    created_at: 
+      type: TIMESTAMP
+    updated_at: 
+      type: TIMESTAMP
+    is_deleted: 
+      type: TINYINT
+      default: 0
     _indexes: 
       FK_ipal_komunal_wilayah: 
         - id_wilayah
@@ -151,6 +165,13 @@ propel:
       default: 0
     keterangan: 
       type: LONGVARCHAR
+    created_at: 
+      type: TIMESTAMP
+    updated_at: 
+      type: TIMESTAMP
+    is_deleted: 
+      type: TINYINT
+      default: 0
     _indexes: 
       FK_kader_wilayah: 
         - id_wilayah

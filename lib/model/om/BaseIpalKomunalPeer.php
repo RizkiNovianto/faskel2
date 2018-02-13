@@ -13,7 +13,7 @@ abstract class BaseIpalKomunalPeer {
 	const CLASS_DEFAULT = 'lib.model.IpalKomunal';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -56,23 +56,32 @@ abstract class BaseIpalKomunalPeer {
 	const KETERANGAN = 'ipal_komunal.KETERANGAN';
 
 	
+	const CREATED_AT = 'ipal_komunal.CREATED_AT';
+
+	
+	const UPDATED_AT = 'ipal_komunal.UPDATED_AT';
+
+	
+	const IS_DELETED = 'ipal_komunal.IS_DELETED';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'IdWilayah', 'Nama', 'Alamat', 'DasarPembangunan', 'TanggalPembangunan', 'BulanPembangunan', 'TahunPembangunan', 'Pengelola', 'Kondisi', 'Status', 'Keterangan', ),
-		BasePeer::TYPE_COLNAME => array (IpalKomunalPeer::ID, IpalKomunalPeer::ID_WILAYAH, IpalKomunalPeer::NAMA, IpalKomunalPeer::ALAMAT, IpalKomunalPeer::DASAR_PEMBANGUNAN, IpalKomunalPeer::TANGGAL_PEMBANGUNAN, IpalKomunalPeer::BULAN_PEMBANGUNAN, IpalKomunalPeer::TAHUN_PEMBANGUNAN, IpalKomunalPeer::PENGELOLA, IpalKomunalPeer::KONDISI, IpalKomunalPeer::STATUS, IpalKomunalPeer::KETERANGAN, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'id_wilayah', 'nama', 'alamat', 'dasar_pembangunan', 'tanggal_pembangunan', 'bulan_pembangunan', 'tahun_pembangunan', 'pengelola', 'kondisi', 'status', 'keterangan', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'IdWilayah', 'Nama', 'Alamat', 'DasarPembangunan', 'TanggalPembangunan', 'BulanPembangunan', 'TahunPembangunan', 'Pengelola', 'Kondisi', 'Status', 'Keterangan', 'CreatedAt', 'UpdatedAt', 'IsDeleted', ),
+		BasePeer::TYPE_COLNAME => array (IpalKomunalPeer::ID, IpalKomunalPeer::ID_WILAYAH, IpalKomunalPeer::NAMA, IpalKomunalPeer::ALAMAT, IpalKomunalPeer::DASAR_PEMBANGUNAN, IpalKomunalPeer::TANGGAL_PEMBANGUNAN, IpalKomunalPeer::BULAN_PEMBANGUNAN, IpalKomunalPeer::TAHUN_PEMBANGUNAN, IpalKomunalPeer::PENGELOLA, IpalKomunalPeer::KONDISI, IpalKomunalPeer::STATUS, IpalKomunalPeer::KETERANGAN, IpalKomunalPeer::CREATED_AT, IpalKomunalPeer::UPDATED_AT, IpalKomunalPeer::IS_DELETED, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'id_wilayah', 'nama', 'alamat', 'dasar_pembangunan', 'tanggal_pembangunan', 'bulan_pembangunan', 'tahun_pembangunan', 'pengelola', 'kondisi', 'status', 'keterangan', 'created_at', 'updated_at', 'is_deleted', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdWilayah' => 1, 'Nama' => 2, 'Alamat' => 3, 'DasarPembangunan' => 4, 'TanggalPembangunan' => 5, 'BulanPembangunan' => 6, 'TahunPembangunan' => 7, 'Pengelola' => 8, 'Kondisi' => 9, 'Status' => 10, 'Keterangan' => 11, ),
-		BasePeer::TYPE_COLNAME => array (IpalKomunalPeer::ID => 0, IpalKomunalPeer::ID_WILAYAH => 1, IpalKomunalPeer::NAMA => 2, IpalKomunalPeer::ALAMAT => 3, IpalKomunalPeer::DASAR_PEMBANGUNAN => 4, IpalKomunalPeer::TANGGAL_PEMBANGUNAN => 5, IpalKomunalPeer::BULAN_PEMBANGUNAN => 6, IpalKomunalPeer::TAHUN_PEMBANGUNAN => 7, IpalKomunalPeer::PENGELOLA => 8, IpalKomunalPeer::KONDISI => 9, IpalKomunalPeer::STATUS => 10, IpalKomunalPeer::KETERANGAN => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_wilayah' => 1, 'nama' => 2, 'alamat' => 3, 'dasar_pembangunan' => 4, 'tanggal_pembangunan' => 5, 'bulan_pembangunan' => 6, 'tahun_pembangunan' => 7, 'pengelola' => 8, 'kondisi' => 9, 'status' => 10, 'keterangan' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdWilayah' => 1, 'Nama' => 2, 'Alamat' => 3, 'DasarPembangunan' => 4, 'TanggalPembangunan' => 5, 'BulanPembangunan' => 6, 'TahunPembangunan' => 7, 'Pengelola' => 8, 'Kondisi' => 9, 'Status' => 10, 'Keterangan' => 11, 'CreatedAt' => 12, 'UpdatedAt' => 13, 'IsDeleted' => 14, ),
+		BasePeer::TYPE_COLNAME => array (IpalKomunalPeer::ID => 0, IpalKomunalPeer::ID_WILAYAH => 1, IpalKomunalPeer::NAMA => 2, IpalKomunalPeer::ALAMAT => 3, IpalKomunalPeer::DASAR_PEMBANGUNAN => 4, IpalKomunalPeer::TANGGAL_PEMBANGUNAN => 5, IpalKomunalPeer::BULAN_PEMBANGUNAN => 6, IpalKomunalPeer::TAHUN_PEMBANGUNAN => 7, IpalKomunalPeer::PENGELOLA => 8, IpalKomunalPeer::KONDISI => 9, IpalKomunalPeer::STATUS => 10, IpalKomunalPeer::KETERANGAN => 11, IpalKomunalPeer::CREATED_AT => 12, IpalKomunalPeer::UPDATED_AT => 13, IpalKomunalPeer::IS_DELETED => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_wilayah' => 1, 'nama' => 2, 'alamat' => 3, 'dasar_pembangunan' => 4, 'tanggal_pembangunan' => 5, 'bulan_pembangunan' => 6, 'tahun_pembangunan' => 7, 'pengelola' => 8, 'kondisi' => 9, 'status' => 10, 'keterangan' => 11, 'created_at' => 12, 'updated_at' => 13, 'is_deleted' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -149,6 +158,12 @@ abstract class BaseIpalKomunalPeer {
 		$criteria->addSelectColumn(IpalKomunalPeer::STATUS);
 
 		$criteria->addSelectColumn(IpalKomunalPeer::KETERANGAN);
+
+		$criteria->addSelectColumn(IpalKomunalPeer::CREATED_AT);
+
+		$criteria->addSelectColumn(IpalKomunalPeer::UPDATED_AT);
+
+		$criteria->addSelectColumn(IpalKomunalPeer::IS_DELETED);
 
 	}
 

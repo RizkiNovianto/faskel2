@@ -20,6 +20,8 @@ generator:
     edit:
         title: Form Pengisian Data IPAL Komunal
         display: [_id_wilayah, nama, alamat, dasar_pembangunan, _tanggal_pembangunan, _bulan_pembangunan, tahun_pembangunan, pengelola, kondisi, _status, keterangan]
+        actions:
+            __delete: ~
         fields:
             id_wilayah:
                 name: Wilayah

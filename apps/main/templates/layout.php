@@ -86,9 +86,9 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav" style="position:fixed;">
                     <li>
-                        <?php echo link_to('<i class="fa fa-fw fa-user"></i> Pengguna (TEMP)', 'pengguna')?>                       
+                        <?php //echo link_to('<i class="fa fa-fw fa-user"></i> Pengguna (TEMP)', 'pengguna')?>                       
                     </li>
-                    <li>
+					<li>
                         <?php echo link_to('<i class="fa fa-fw fa-home"></i> Beranda', 'home')?>                       
                     </li>
                     <li>

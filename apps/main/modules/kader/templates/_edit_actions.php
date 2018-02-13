@@ -10,4 +10,11 @@
   'name' => 'save_and_add',
   'class' => 'sf_admin_action_save_and_add',
 )) ?></li>
+      <li class="float-left"><?php if ($kader->getId()): ?>
+<?php echo button_to(__('Hapus Data'), 'kader/deleteFlag?id='.$kader->getId(), array (
+  'confirm' => __('Hapus Data Ini ?\n('.$kader->getNama().' - '.$kader->getWilayah().')'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
+
 </ul>

@@ -10,4 +10,10 @@
   'name' => 'save_and_add',
   'class' => 'sf_admin_action_save_and_add',
 )) ?></li>
+  <li class="float-left"><?php if ($ipal_komunal->getId()): ?>
+<?php echo button_to(__('Hapus Data'), 'ipalKomunal/deleteFlag?id='.$ipal_komunal->getId(), array (
+  'confirm' => __('Hapus Data Ini ?\n('.$ipal_komunal->getNama().' - '.$ipal_komunal->getWilayah().')'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
 </ul>

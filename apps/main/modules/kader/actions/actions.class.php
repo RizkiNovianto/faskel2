@@ -34,6 +34,8 @@ class kaderActions extends autokaderActions
     
     if(!$this->getUser()->getGuardUser()->getIsSuperAdmin()) $c->add(KaderPeer::ID_WILAYAH, $wilayah_id);
     
+    $c->add(KaderPeer::IS_DELETED, 0);
+    
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', $this->getUser()->getAttribute('page', 1, 'sf_admin/kader')));
     $this->pager->init();
@@ -50,6 +52,17 @@ class kaderActions extends autokaderActions
         $this->updateKaderFromRequest();
         if ($this->kader->getValid() == 0) $this->kader->setValid(1);
         else $this->kader->setValid(0);
+        $this->saveKader($this->kader);
+        return $this->redirect('kader/list');
+    }
+	
+	public function executeAktivasi()
+    {
+        $id = $this->getRequestParameter('id');
+        $this->kader = KaderPeer::retrieveByPK($id);
+        $this->updateKaderFromRequest();
+        if ($this->kader->getStatus() == 0) $this->kader->setStatus(1);
+        else $this->kader->setStatus(0);
         $this->saveKader($this->kader);
         return $this->redirect('kader/list');
     }
@@ -119,5 +132,16 @@ class kaderActions extends autokaderActions
 /*---------------------------------------*/    
     
   }
+
+  public function executeDeleteFlag()
+    {
+        $id = $this->getRequestParameter('id');
+        $this->kader = KaderPeer::retrieveByPK($id);
+        $this->updateKaderFromRequest();
+        if ($this->kader->getIsDeleted() == 0) $this->kader->setIsDeleted(1);
+        else $this->kader->setIsDeleted(0);
+        $this->saveKader($this->kader);
+        return $this->redirect('kader/list');
+    }
 
 }

@@ -63,6 +63,18 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 	
 	protected $keterangan;
 
+
+	
+	protected $created_at;
+
+
+	
+	protected $updated_at;
+
+
+	
+	protected $is_deleted = 0;
+
 	
 	protected $aWilayah;
 
@@ -168,6 +180,57 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 	{
 
 		return $this->keterangan;
+	}
+
+	
+	public function getCreatedAt($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->created_at === null || $this->created_at === '') {
+			return null;
+		} elseif (!is_int($this->created_at)) {
+						$ts = strtotime($this->created_at);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [created_at] as date/time value: " . var_export($this->created_at, true));
+			}
+		} else {
+			$ts = $this->created_at;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getUpdatedAt($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->updated_at === null || $this->updated_at === '') {
+			return null;
+		} elseif (!is_int($this->updated_at)) {
+						$ts = strtotime($this->updated_at);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [updated_at] as date/time value: " . var_export($this->updated_at, true));
+			}
+		} else {
+			$ts = $this->updated_at;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getIsDeleted()
+	{
+
+		return $this->is_deleted;
 	}
 
 	
@@ -371,6 +434,54 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCreatedAt($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [created_at] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->created_at !== $ts) {
+			$this->created_at = $ts;
+			$this->modifiedColumns[] = BankSampahPeer::CREATED_AT;
+		}
+
+	} 
+	
+	public function setUpdatedAt($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [updated_at] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->updated_at !== $ts) {
+			$this->updated_at = $ts;
+			$this->modifiedColumns[] = BankSampahPeer::UPDATED_AT;
+		}
+
+	} 
+	
+	public function setIsDeleted($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->is_deleted !== $v || $v === 0) {
+			$this->is_deleted = $v;
+			$this->modifiedColumns[] = BankSampahPeer::IS_DELETED;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -403,11 +514,17 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 
 			$this->keterangan = $rs->getString($startcol + 13);
 
+			$this->created_at = $rs->getTimestamp($startcol + 14, null);
+
+			$this->updated_at = $rs->getTimestamp($startcol + 15, null);
+
+			$this->is_deleted = $rs->getInt($startcol + 16);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 14; 
+						return $startcol + 17; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating BankSampah object", $e);
 		}
@@ -438,6 +555,16 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 	
 	public function save($con = null)
 	{
+    if ($this->isNew() && !$this->isColumnModified(BankSampahPeer::CREATED_AT))
+    {
+      $this->setCreatedAt(time());
+    }
+
+    if ($this->isModified() && !$this->isColumnModified(BankSampahPeer::UPDATED_AT))
+    {
+      $this->setUpdatedAt(time());
+    }
+
 		if ($this->isDeleted()) {
 			throw new PropelException("You cannot save an object that has been deleted.");
 		}
@@ -593,6 +720,15 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 			case 13:
 				return $this->getKeterangan();
 				break;
+			case 14:
+				return $this->getCreatedAt();
+				break;
+			case 15:
+				return $this->getUpdatedAt();
+				break;
+			case 16:
+				return $this->getIsDeleted();
+				break;
 			default:
 				return null;
 				break;
@@ -617,6 +753,9 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 			$keys[11] => $this->getOmset(),
 			$keys[12] => $this->getStatus(),
 			$keys[13] => $this->getKeterangan(),
+			$keys[14] => $this->getCreatedAt(),
+			$keys[15] => $this->getUpdatedAt(),
+			$keys[16] => $this->getIsDeleted(),
 		);
 		return $result;
 	}
@@ -674,6 +813,15 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 			case 13:
 				$this->setKeterangan($value);
 				break;
+			case 14:
+				$this->setCreatedAt($value);
+				break;
+			case 15:
+				$this->setUpdatedAt($value);
+				break;
+			case 16:
+				$this->setIsDeleted($value);
+				break;
 		} 	}
 
 	
@@ -695,6 +843,9 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[11], $arr)) $this->setOmset($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setStatus($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setKeterangan($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCreatedAt($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedAt($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setIsDeleted($arr[$keys[16]]);
 	}
 
 	
@@ -716,6 +867,9 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BankSampahPeer::OMSET)) $criteria->add(BankSampahPeer::OMSET, $this->omset);
 		if ($this->isColumnModified(BankSampahPeer::STATUS)) $criteria->add(BankSampahPeer::STATUS, $this->status);
 		if ($this->isColumnModified(BankSampahPeer::KETERANGAN)) $criteria->add(BankSampahPeer::KETERANGAN, $this->keterangan);
+		if ($this->isColumnModified(BankSampahPeer::CREATED_AT)) $criteria->add(BankSampahPeer::CREATED_AT, $this->created_at);
+		if ($this->isColumnModified(BankSampahPeer::UPDATED_AT)) $criteria->add(BankSampahPeer::UPDATED_AT, $this->updated_at);
+		if ($this->isColumnModified(BankSampahPeer::IS_DELETED)) $criteria->add(BankSampahPeer::IS_DELETED, $this->is_deleted);
 
 		return $criteria;
 	}
@@ -771,6 +925,12 @@ abstract class BaseBankSampah extends BaseObject  implements Persistent {
 		$copyObj->setStatus($this->status);
 
 		$copyObj->setKeterangan($this->keterangan);
+
+		$copyObj->setCreatedAt($this->created_at);
+
+		$copyObj->setUpdatedAt($this->updated_at);
+
+		$copyObj->setIsDeleted($this->is_deleted);
 
 
 		$copyObj->setNew(true);

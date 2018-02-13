@@ -3,3 +3,4 @@ all:
     class:          sfPropelDatabase
     param:
       dsn:          mysql://root@localhost/faskel_symfony
+      password:     

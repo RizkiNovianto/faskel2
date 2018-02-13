@@ -33,6 +33,8 @@ class bankSampahActions extends autobankSampahActions
     
     if(!$this->getUser()->getGuardUser()->getIsSuperAdmin()) $c->add(BankSampahPeer::ID_WILAYAH, $wilayah_id);
     
+    $c->add(BankSampahPeer::IS_DELETED, 0);
+    
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', $this->getUser()->getAttribute('page', 1, 'sf_admin/bank_sampah')));
     $this->pager->init();
@@ -117,5 +119,16 @@ class bankSampahActions extends autobankSampahActions
 /*---------------------------------------*/    
     
   }
+  
+  public function executeDeleteFlag()
+    {
+        $id = $this->getRequestParameter('id');
+        $this->bank_sampah = BankSampahPeer::retrieveByPK($id);
+        $this->updateBankSampahFromRequest();
+        if ($this->bank_sampah->getIsDeleted() == 0) $this->bank_sampah->setIsDeleted(1);
+        else $this->bank_sampah->setIsDeleted(0);
+        $this->saveBankSampah($this->bank_sampah);
+        return $this->redirect('bankSampah/list');
+    }
 
 }

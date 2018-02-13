@@ -10,4 +10,10 @@
   'name' => 'save_and_add',
   'class' => 'sf_admin_action_save_and_add',
 )) ?></li>
+  <li class="float-left"><?php if ($bank_sampah->getId()): ?>
+<?php echo button_to(__('Hapus Data'), 'bankSampah/deleteFlag?id='.$bank_sampah->getId(), array (
+  'confirm' => __('Hapus Data Ini ?\n('.$bank_sampah->getNama().' - '.$bank_sampah->getWilayah().')'),
+  'class' => 'sf_admin_action_delete',
+)) ?><?php endif; ?>
+</li>
 </ul>

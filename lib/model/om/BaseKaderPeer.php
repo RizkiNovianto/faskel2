@@ -13,7 +13,7 @@ abstract class BaseKaderPeer {
 	const CLASS_DEFAULT = 'lib.model.Kader';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -53,23 +53,32 @@ abstract class BaseKaderPeer {
 	const KETERANGAN = 'kader.KETERANGAN';
 
 	
+	const CREATED_AT = 'kader.CREATED_AT';
+
+	
+	const UPDATED_AT = 'kader.UPDATED_AT';
+
+	
+	const IS_DELETED = 'kader.IS_DELETED';
+
+	
 	private static $phpNameMap = null;
 
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'IdWilayah', 'IdJenisKader', 'Nama', 'Alamat', 'Rt', 'Rw', 'NoTelp', 'Valid', 'Status', 'Keterangan', ),
-		BasePeer::TYPE_COLNAME => array (KaderPeer::ID, KaderPeer::ID_WILAYAH, KaderPeer::ID_JENIS_KADER, KaderPeer::NAMA, KaderPeer::ALAMAT, KaderPeer::RT, KaderPeer::RW, KaderPeer::NO_TELP, KaderPeer::VALID, KaderPeer::STATUS, KaderPeer::KETERANGAN, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'id_wilayah', 'id_jenis_kader', 'nama', 'alamat', 'RT', 'RW', 'no_telp', 'valid', 'status', 'keterangan', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'IdWilayah', 'IdJenisKader', 'Nama', 'Alamat', 'Rt', 'Rw', 'NoTelp', 'Valid', 'Status', 'Keterangan', 'CreatedAt', 'UpdatedAt', 'IsDeleted', ),
+		BasePeer::TYPE_COLNAME => array (KaderPeer::ID, KaderPeer::ID_WILAYAH, KaderPeer::ID_JENIS_KADER, KaderPeer::NAMA, KaderPeer::ALAMAT, KaderPeer::RT, KaderPeer::RW, KaderPeer::NO_TELP, KaderPeer::VALID, KaderPeer::STATUS, KaderPeer::KETERANGAN, KaderPeer::CREATED_AT, KaderPeer::UPDATED_AT, KaderPeer::IS_DELETED, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'id_wilayah', 'id_jenis_kader', 'nama', 'alamat', 'RT', 'RW', 'no_telp', 'valid', 'status', 'keterangan', 'created_at', 'updated_at', 'is_deleted', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdWilayah' => 1, 'IdJenisKader' => 2, 'Nama' => 3, 'Alamat' => 4, 'Rt' => 5, 'Rw' => 6, 'NoTelp' => 7, 'Valid' => 8, 'Status' => 9, 'Keterangan' => 10, ),
-		BasePeer::TYPE_COLNAME => array (KaderPeer::ID => 0, KaderPeer::ID_WILAYAH => 1, KaderPeer::ID_JENIS_KADER => 2, KaderPeer::NAMA => 3, KaderPeer::ALAMAT => 4, KaderPeer::RT => 5, KaderPeer::RW => 6, KaderPeer::NO_TELP => 7, KaderPeer::VALID => 8, KaderPeer::STATUS => 9, KaderPeer::KETERANGAN => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_wilayah' => 1, 'id_jenis_kader' => 2, 'nama' => 3, 'alamat' => 4, 'RT' => 5, 'RW' => 6, 'no_telp' => 7, 'valid' => 8, 'status' => 9, 'keterangan' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'IdWilayah' => 1, 'IdJenisKader' => 2, 'Nama' => 3, 'Alamat' => 4, 'Rt' => 5, 'Rw' => 6, 'NoTelp' => 7, 'Valid' => 8, 'Status' => 9, 'Keterangan' => 10, 'CreatedAt' => 11, 'UpdatedAt' => 12, 'IsDeleted' => 13, ),
+		BasePeer::TYPE_COLNAME => array (KaderPeer::ID => 0, KaderPeer::ID_WILAYAH => 1, KaderPeer::ID_JENIS_KADER => 2, KaderPeer::NAMA => 3, KaderPeer::ALAMAT => 4, KaderPeer::RT => 5, KaderPeer::RW => 6, KaderPeer::NO_TELP => 7, KaderPeer::VALID => 8, KaderPeer::STATUS => 9, KaderPeer::KETERANGAN => 10, KaderPeer::CREATED_AT => 11, KaderPeer::UPDATED_AT => 12, KaderPeer::IS_DELETED => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'id_wilayah' => 1, 'id_jenis_kader' => 2, 'nama' => 3, 'alamat' => 4, 'RT' => 5, 'RW' => 6, 'no_telp' => 7, 'valid' => 8, 'status' => 9, 'keterangan' => 10, 'created_at' => 11, 'updated_at' => 12, 'is_deleted' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -144,6 +153,12 @@ abstract class BaseKaderPeer {
 		$criteria->addSelectColumn(KaderPeer::STATUS);
 
 		$criteria->addSelectColumn(KaderPeer::KETERANGAN);
+
+		$criteria->addSelectColumn(KaderPeer::CREATED_AT);
+
+		$criteria->addSelectColumn(KaderPeer::UPDATED_AT);
+
+		$criteria->addSelectColumn(KaderPeer::IS_DELETED);
 
 	}
 

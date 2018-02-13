@@ -51,6 +51,18 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 	
 	protected $keterangan;
 
+
+	
+	protected $created_at;
+
+
+	
+	protected $updated_at;
+
+
+	
+	protected $is_deleted = 0;
+
 	
 	protected $aWilayah;
 
@@ -138,6 +150,57 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 	{
 
 		return $this->keterangan;
+	}
+
+	
+	public function getCreatedAt($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->created_at === null || $this->created_at === '') {
+			return null;
+		} elseif (!is_int($this->created_at)) {
+						$ts = strtotime($this->created_at);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [created_at] as date/time value: " . var_export($this->created_at, true));
+			}
+		} else {
+			$ts = $this->created_at;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getUpdatedAt($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->updated_at === null || $this->updated_at === '') {
+			return null;
+		} elseif (!is_int($this->updated_at)) {
+						$ts = strtotime($this->updated_at);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [updated_at] as date/time value: " . var_export($this->updated_at, true));
+			}
+		} else {
+			$ts = $this->updated_at;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getIsDeleted()
+	{
+
+		return $this->is_deleted;
 	}
 
 	
@@ -303,6 +366,54 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCreatedAt($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [created_at] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->created_at !== $ts) {
+			$this->created_at = $ts;
+			$this->modifiedColumns[] = KaderPeer::CREATED_AT;
+		}
+
+	} 
+	
+	public function setUpdatedAt($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [updated_at] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->updated_at !== $ts) {
+			$this->updated_at = $ts;
+			$this->modifiedColumns[] = KaderPeer::UPDATED_AT;
+		}
+
+	} 
+	
+	public function setIsDeleted($v)
+	{
+
+						if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->is_deleted !== $v || $v === 0) {
+			$this->is_deleted = $v;
+			$this->modifiedColumns[] = KaderPeer::IS_DELETED;
+		}
+
+	} 
+	
 	public function hydrate(ResultSet $rs, $startcol = 1)
 	{
 		try {
@@ -329,11 +440,17 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 
 			$this->keterangan = $rs->getString($startcol + 10);
 
+			$this->created_at = $rs->getTimestamp($startcol + 11, null);
+
+			$this->updated_at = $rs->getTimestamp($startcol + 12, null);
+
+			$this->is_deleted = $rs->getInt($startcol + 13);
+
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 14; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Kader object", $e);
 		}
@@ -364,6 +481,16 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 	
 	public function save($con = null)
 	{
+    if ($this->isNew() && !$this->isColumnModified(KaderPeer::CREATED_AT))
+    {
+      $this->setCreatedAt(time());
+    }
+
+    if ($this->isModified() && !$this->isColumnModified(KaderPeer::UPDATED_AT))
+    {
+      $this->setUpdatedAt(time());
+    }
+
 		if ($this->isDeleted()) {
 			throw new PropelException("You cannot save an object that has been deleted.");
 		}
@@ -523,6 +650,15 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 			case 10:
 				return $this->getKeterangan();
 				break;
+			case 11:
+				return $this->getCreatedAt();
+				break;
+			case 12:
+				return $this->getUpdatedAt();
+				break;
+			case 13:
+				return $this->getIsDeleted();
+				break;
 			default:
 				return null;
 				break;
@@ -544,6 +680,9 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 			$keys[8] => $this->getValid(),
 			$keys[9] => $this->getStatus(),
 			$keys[10] => $this->getKeterangan(),
+			$keys[11] => $this->getCreatedAt(),
+			$keys[12] => $this->getUpdatedAt(),
+			$keys[13] => $this->getIsDeleted(),
 		);
 		return $result;
 	}
@@ -592,6 +731,15 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 			case 10:
 				$this->setKeterangan($value);
 				break;
+			case 11:
+				$this->setCreatedAt($value);
+				break;
+			case 12:
+				$this->setUpdatedAt($value);
+				break;
+			case 13:
+				$this->setIsDeleted($value);
+				break;
 		} 	}
 
 	
@@ -610,6 +758,9 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setValid($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setStatus($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setKeterangan($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCreatedAt($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUpdatedAt($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setIsDeleted($arr[$keys[13]]);
 	}
 
 	
@@ -628,6 +779,9 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(KaderPeer::VALID)) $criteria->add(KaderPeer::VALID, $this->valid);
 		if ($this->isColumnModified(KaderPeer::STATUS)) $criteria->add(KaderPeer::STATUS, $this->status);
 		if ($this->isColumnModified(KaderPeer::KETERANGAN)) $criteria->add(KaderPeer::KETERANGAN, $this->keterangan);
+		if ($this->isColumnModified(KaderPeer::CREATED_AT)) $criteria->add(KaderPeer::CREATED_AT, $this->created_at);
+		if ($this->isColumnModified(KaderPeer::UPDATED_AT)) $criteria->add(KaderPeer::UPDATED_AT, $this->updated_at);
+		if ($this->isColumnModified(KaderPeer::IS_DELETED)) $criteria->add(KaderPeer::IS_DELETED, $this->is_deleted);
 
 		return $criteria;
 	}
@@ -677,6 +831,12 @@ abstract class BaseKader extends BaseObject  implements Persistent {
 		$copyObj->setStatus($this->status);
 
 		$copyObj->setKeterangan($this->keterangan);
+
+		$copyObj->setCreatedAt($this->created_at);
+
+		$copyObj->setUpdatedAt($this->updated_at);
+
+		$copyObj->setIsDeleted($this->is_deleted);
 
 
 		$copyObj->setNew(true);

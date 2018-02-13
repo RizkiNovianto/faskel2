@@ -27,7 +27,9 @@ generator:
         
     edit:
         title: Form Pengisian Data Kader
-        display: [_id_wilayah, id_jenis_kader, nama, alamat, rt, rw, no_telp, _valid, _status, keterangan ]
+        display: [_id_wilayah, id_jenis_kader, nama, alamat, rt, rw, no_telp, _status, keterangan ]
+        actions:
+            __delete: ~
         fields:
             id_wilayah:
                 name: Wilayah

@@ -44,6 +44,8 @@ class ipalKomunalActions extends autoipalKomunalActions
     
     if(!$this->getUser()->getGuardUser()->getIsSuperAdmin()) $c->add(IpalKomunalPeer::ID_WILAYAH, $wilayah_id);
     
+    $c->add(IpalKomunalPeer::IS_DELETED, 0);
+    
     $this->pager->setCriteria($c);
     $this->pager->setPage($this->getRequestParameter('page', $this->getUser()->getAttribute('page', 1, 'sf_admin/ipal_komunal')));
     $this->pager->init();
@@ -133,5 +135,15 @@ class ipalKomunalActions extends autoipalKomunalActions
     
   }
 
+  public function executeDeleteFlag()
+    {
+        $id = $this->getRequestParameter('id');
+        $this->ipal_komunal = IpalKomunalPeer::retrieveByPK($id);
+        $this->updateIpalKomunalFromRequest();
+        if ($this->ipal_komunal->getIsDeleted() == 0) $this->ipal_komunal->setIsDeleted(1);
+        else $this->ipal_komunal->setIsDeleted(0);
+        $this->saveIpalKomunal($this->ipal_komunal);
+        return $this->redirect('ipalKomunal/list');
+    }
 
 }
